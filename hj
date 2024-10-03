@@ -1,0 +1,136 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define max 50
+
+int count = 0;
+
+struct reservation {
+    char nom[50];
+    char prenom[50];
+    char Tele[50];
+    int age;
+    char statut[50];
+    char date[50];
+};
+
+struct reservation res[max];
+void suppimer() {
+    int mod;
+    printf("entre le ref ");
+    scanf("%d", &mod);
+    if (mod > 0 && mod <= count) {
+        for (int i = mod - 1; i < count - 1; i++) {
+            strcpy(res[i].nom, res[i + 1].nom);
+            strcpy(res[i].prenom, res[i + 1].prenom);
+            strcpy(res[i].Tele, res[i + 1].Tele);
+            res[i].age = res[i + 1].age;
+            strcpy(res[i].statut, res[i + 1].statut);
+            strcpy(res[i].date, res[i + 1].date);
+            }
+            printf("le ref est supreme");
+        count--;
+    } else {
+        printf("invalid ref!!!\n");
+    }
+}
+
+void menu() {
+    printf("--------------------------------------------------------------------------------------------------\n");
+    printf("entre le nombre de l operation :\n");
+    printf("1.-------> Ajouter une reservation\n2. ------->Modifier une reservation\n3. ------->Supprimer une reservation\n4. -------> Afficher les details d'une reservation\n5. -------> quitte le program\n");
+    printf("--------------------------------------------------------------------------------------------------\n");
+}
+
+void afficher() {
+    if (count > 0) {
+        printf("\n--------------------------------------------------------------------------------------------------------------");
+        printf("\n|  ref  |    First Name     |       Last Name       |       Tel :       |  Age   |  Status   |      DATE      |");
+        printf("\n--------------------------------------------------------------------------------------------------------------");
+        for (int i = 0; i < count; i++) {
+            printf("\n|%-10d|%-18s|%-22s|%-20s|%-8d|%-10d|%-15s|", i + 1, res[i].nom, res[i].prenom, res[i].Tele, res[i].age, res[i].statut, res[i].date);
+            printf("\n-----------------------------------------------------------------------------------------------------------");
+        }
+    } else {
+        printf("\nAucun\n");
+    }
+}
+
+void ajoute() {
+    if (count < max) {
+        printf("Entrez le nom : ");
+        scanf("%s", res[count].nom);
+        printf("Entrez le prenom : ");
+        scanf("%s", res[count].prenom);
+        printf("Entrez l'age : ");
+        scanf("%d", &res[count].age);
+        printf("Entrez le tel : ");
+        scanf("%s", res[count].Tele);
+        printf("Entrez le statut : ");
+        scanf("%s", res[count].statut);
+        printf("Entrez la date : ");
+        scanf("%s", res[count].date);
+        count++;
+    } else {
+        printf("La liste est pleine.\n");
+    }
+}
+void modifier (){
+    int mod;
+ printf("entre le ref ");
+ scanf("%d" , &mod);
+  for (int i = 0 ; i< count ; i++){
+    if ((i+1) == mod){
+
+        printf("Entrez le nom : ");
+        scanf("%s", res[i].nom);
+        printf("Entrez le prenom : ");
+        scanf("%s", res[i].prenom);
+        printf("Entrez l'age : ");
+        scanf("%d", &res[i].age);
+        printf("Entrez le tel : ");
+        scanf("%s", res[i].Tele);
+        printf("Entrez le statut : ");
+        scanf("%s", res[i].statut);
+        printf("Entrez la date : ");
+        scanf("%s", res[i].date);
+
+    }else {
+
+    printf("invalide name ");
+    }
+
+
+  }
+
+}
+int main() {
+     int choix;
+    do {
+        menu();
+        printf("Entrez votre choix : ");
+        scanf("%d", &choix);
+        if (choix != 5 || choix != 4 || choix != 3 || choix != 2  || choix != 1 ) {
+            printf("invalide \n");
+        }else {
+        switch (choix) {
+            case 1:
+                ajoute();
+                break;
+            case 2:
+                modifier();
+                break;
+            case 3:
+                suppimer();
+                break;
+            case 4:
+                afficher();
+                break;
+            case 5:
+                printf("au revoir\n");
+                break;
+            default:
+                printf("invalide\n");
+        }
+     while (choix != 5);
+        }
