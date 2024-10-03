@@ -3,7 +3,7 @@
 #include <string.h>
 #define max 50
 
-int count = 0;
+int count = 10;
 
 struct reservation {
     char nom[50];
@@ -16,7 +16,24 @@ struct reservation {
 
 struct reservation res[max];
 
-
+void recherche() {
+    char nome[50];
+    int found = 0;
+    printf("entrez le nom  : ");
+    scanf("%s", nome);
+    printf("la recherche de le nom %s" , nome);
+    for (int i = 0; i < count; i++) {
+        if (strcmp(res[i].nom, nome) == 0) {
+            found = 1;
+            printf("|%-10d|%-18s|%-22s|%-20s|%-8d|%-10s|%-15s|\n",
+                i + 1, res[i].nom, res[i].prenom, res[i].Tele,
+                res[i].age, res[i].statut, res[i].date);
+        }
+    }
+    if (!found) {
+        printf("aucune\n");
+    }
+}
 
  void statistique() {
      int total = count;
@@ -160,6 +177,75 @@ void modifier (){
 
 }
 int main() {
+   strcpy(res[0].nom, "imily");
+    strcpy(res[0].prenom, "brahim");
+    strcpy(res[0].Tele, "0601234567");
+    res[0].age = 25;
+    strcpy(res[0].statut, "valide");
+    strcpy(res[0].date, "01/10/2024");
+
+    strcpy(res[1].nom, "benmouja");
+    strcpy(res[1].prenom, "oussama");
+    strcpy(res[1].Tele, "0612345678");
+    res[1].age = 30;
+    strcpy(res[1].statut, "annule");
+    strcpy(res[1].date, "05/10/2024");
+
+    strcpy(res[2].nom, "adli");
+    strcpy(res[2].prenom, "Ali");
+    strcpy(res[2].Tele, "0623456789");
+    res[2].age = 20;
+    strcpy(res[2].statut, "reporte");
+    strcpy(res[2].date, "10/10/2024");
+
+    strcpy(res[3].nom, "messi");
+    strcpy(res[3].prenom, "lionel");
+    strcpy(res[3].Tele, "0634567890");
+    res[3].age = 45;
+    strcpy(res[3].statut, "traite");
+    strcpy(res[3].date, "12/10/2024");
+
+    strcpy(res[4].nom, "voltair");
+    strcpy(res[4].prenom, "yossef");
+    strcpy(res[4].Tele, "0645678901");
+    res[4].age = 18;
+    strcpy(res[4].statut, "valide");
+    strcpy(res[4].date, "15/10/2024");
+
+    strcpy(res[5].nom, "hamdi");
+    strcpy(res[5].prenom, "jamal");
+    strcpy(res[5].Tele, "0656789012");
+    res[5].age = 50;
+    strcpy(res[5].statut, "annule");
+    strcpy(res[5].date, "18/10/2024");
+
+    strcpy(res[6].nom, "ali");
+    strcpy(res[6].prenom, "amine");
+    strcpy(res[6].Tele, "0667890123");
+    res[6].age = 22;
+    strcpy(res[6].statut, "reporte");
+    strcpy(res[6].date, "20/10/2024");
+
+    strcpy(res[7].nom, "fetal");
+    strcpy(res[7].prenom, "zinab");
+    strcpy(res[7].Tele, "0678901234");
+    res[7].age = 33;
+    strcpy(res[7].statut, "traite");
+    strcpy(res[7].date, "22/10/2024");
+
+    strcpy(res[8].nom, "mahdi");
+    strcpy(res[8].prenom, "aicha");
+    strcpy(res[8].Tele, "0689012345");
+    res[8].age = 40;
+    strcpy(res[8].statut, "valide");
+    strcpy(res[8].date, "25/10/2024");
+
+    strcpy(res[9].nom, "arabi");
+    strcpy(res[9].prenom, "omar");
+    strcpy(res[9].Tele, "0690123456");
+    res[9].age = 29;
+    strcpy(res[9].statut, "annule");
+    strcpy(res[9].date, "28/10/2024");
      int choix;
        jump :
         menu();
@@ -187,10 +273,9 @@ int main() {
                 goto jump;
                 break;
             case 6 :
-
-
-
-
+            recherche();
+            goto jump;
+             break;
             case 7 :
                 printf("au revoir\n");
                 exit(NULL);
