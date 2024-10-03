@@ -16,6 +16,8 @@ struct reservation {
 
 struct reservation res[max];
 
+
+
  void statistique() {
      int total = count;
      int statValide = 0, statReporte = 0, statAnnule = 0, statTraite = 0;
@@ -74,7 +76,7 @@ void suppimer() {
 void menu() {
     printf("--------------------------------------------------------------------------------------------------\n");
     printf("entre le nombre de l operation :\n");
-    printf("1.-------> Ajouter une reservation\n2. ------->Modifier une reservation\n3. ------->Supprimer une reservation\n4. -------> Afficher les details d'une reservation\n5. -------> afficher les statistique\n 6. ---->quitter\n");
+    printf("1.-------> Ajouter une reservation\n2. ------->Modifier une reservation\n3. ------->Supprimer une reservation\n4. -------> Afficher les details d'une reservation\n5. -------> afficher les statistique\n 6-----------> .Recherche des reservations \n 7. ---->quitter\n");
     printf("--------------------------------------------------------------------------------------------------\n");
 }
 
@@ -185,6 +187,11 @@ int main() {
                 goto jump;
                 break;
             case 6 :
+
+
+
+
+            case 7 :
                 printf("au revoir\n");
                 exit(NULL);
                 break;
