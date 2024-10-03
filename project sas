@@ -15,6 +15,42 @@ struct reservation {
 };
 
 struct reservation res[max];
+
+ void statistique() {
+     int total = count;
+     int statValide = 0, statReporte = 0, statAnnule = 0, statTraite = 0;
+ int age0_18 = 0, age19_35 = 0, age36_plus = 0;
+ int ageTotal = 0;
+ for (int i = 0; i < total; i++) {
+ ageTotal += res[i].age;
+ if (res[i].age <= 18) {
+ age0_18++;
+ } else if (res[i].age <= 35) {
+ age19_35++;
+ } else {
+ age36_plus++;
+ }
+ if (strcmp(res[i].statut, "valide") == 0) {
+ statValide++;
+ } else if (strcmp(res[i].statut, "reporte") == 0) {
+ statReporte++;
+ } else if (strcmp(res[i].statut, "annule") == 0) {
+ statAnnule++;
+ } else if (strcmp(res[i].statut, "traite") == 0) {
+ statTraite++;
+ }
+ }
+ printf("Moyenne d'age des patients: %.2f\n", (float)ageTotal / total);
+ printf("Nombre de patients 0-18 ans: %d\n", age0_18);
+ printf("Nombre de patients 19-35 ans: %d\n", age19_35);
+ printf("Nombre de patients 36+ ans: %d\n", age36_plus);
+ printf("Reservations validees: %d\n", statValide);
+ printf("Reservations reportees: %d\n", statReporte);
+ printf("Reservations annulees: %d\n", statAnnule);
+ printf("Reservations traitees: %d\n", statTraite);
+ }
+
+
 void suppimer() {
     int mod;
     printf("entre le ref ");
@@ -38,7 +74,7 @@ void suppimer() {
 void menu() {
     printf("--------------------------------------------------------------------------------------------------\n");
     printf("entre le nombre de l operation :\n");
-    printf("1.-------> Ajouter une reservation\n2. ------->Modifier une reservation\n3. ------->Supprimer une reservation\n4. -------> Afficher les details d'une reservation\n5. -------> quitte le program\n");
+    printf("1.-------> Ajouter une reservation\n2. ------->Modifier une reservation\n3. ------->Supprimer une reservation\n4. -------> Afficher les details d'une reservation\n5. -------> afficher les statistique\n 6. ---->quitter\n");
     printf("--------------------------------------------------------------------------------------------------\n");
 }
 
@@ -66,7 +102,7 @@ void ajoute() {
         scanf("%d", &res[count].age);
         printf("Entrez le tel : ");
         scanf("%s", res[count].Tele);
-        printf("Entrez le statut : ");
+        printf("Entrez le statut ( valide ,reporte ,annule ,traite ): ");
         scanf("%s", res[count].statut);
         printf("Entrez la date : ");
         scanf("%s", res[count].date);
@@ -77,10 +113,27 @@ void ajoute() {
 }
 void modifier (){
     int mod;
- printf("entre le ref ");
- scanf("%d" , &mod);
+
+ //printf("entre le ref ");
+ //scanf("%d" , &mod);
+
+ char input[10];
+
+    printf("Entrez le ref: ");
+    while (1) {
+        scanf("%s", input);
+        mod = atoi(input);
+        if (mod >= 1 && mod <= 5 && mod != 0) {
+            break;
+        } else {
+            printf("Entrée invalide  , ressaey: ");
+        }
+    }
+
+
+
   for (int i = 0 ; i< count ; i++){
-    if ((i+1) == mod){
+    if ((i+1) == mod ){
 
         printf("Entrez le nom : ");
         scanf("%s", res[i].nom);
@@ -90,7 +143,7 @@ void modifier (){
         scanf("%d", &res[i].age);
         printf("Entrez le tel : ");
         scanf("%s", res[i].Tele);
-        printf("Entrez le statut : ");
+        printf("Entrez le statut (valide ,reporte ,annule ,traite) : ");
         scanf("%s", res[i].statut);
         printf("Entrez la date : ");
         scanf("%s", res[i].date);
@@ -106,31 +159,36 @@ void modifier (){
 }
 int main() {
      int choix;
-    do {
+       jump :
         menu();
         printf("Entrez votre choix : ");
         scanf("%d", &choix);
-        if (choix != 5 || choix != 4 || choix != 3 || choix != 2  || choix != 1 ) {
-            printf("invalide \n");
-        }else {
         switch (choix) {
             case 1:
                 ajoute();
+                goto jump;
                 break;
             case 2:
                 modifier();
+                goto jump;
                 break;
             case 3:
                 suppimer();
+                goto jump;
                 break;
             case 4:
                 afficher();
+                goto jump;
                 break;
             case 5:
+                 statistique();
+                goto jump;
+                break;
+            case 6 :
                 printf("au revoir\n");
+                exit(NULL);
                 break;
             default:
                 printf("invalide\n");
         }
-     while (choix != 5);
-        }
+}
