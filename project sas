@@ -21,7 +21,7 @@ void recherche() {
     int found = 0;
     printf("entrez le nom  : ");
     scanf("%s", nome);
-    printf("la recherche de le nom %s" , nome);
+    printf("la recherche de le nom %s  " , nome);
     for (int i = 0; i < count; i++) {
         if (strcmp(res[i].nom, nome) == 0) {
             found = 1;
